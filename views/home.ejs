@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Url Shortener</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: rgb(12, 12, 54);
+        color: aqua;
+      }
+      h1{
+        margin-top: 100px;
+        margin-left: 600px;
+        margin-bottom: 100px;
+        font-size: 2.8rem;
+      }
+      .main1{
+        color: white;
+        margin-left: 450px;
+        font-size: 2.0rem;
+        padding-bottom: 20px;
+      }
+      .main1 input{
+        padding: 10px;
+        font-size: 1.4rem;
+        border-radius: 10px;
+      }
+      .main1 button{
+        padding: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        font-size: 1.4rem;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+      }
+      .main1 button a{
+        text-decoration: none;
+        border-radius: 10px;
+        color: white;
+      }
+      .main1 button:hover{
+        background-color: rgb(1, 41, 41);
+        color: rgb(136, 253, 253);
+      }
+      .main2{
+        color: white;
+        margin-left: 450px;
+        font-size: 2.0rem;
+        padding-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><i>URL Shortener</i></h1>
+    <% if(locals.id){ %>
+    <p>URL Generated: https://localhost:3000/url<%= id %></p>
+    <% } %>
+    <div class="main1">
+      <form action="/url" method="post">
+        <label for="">Enter your URL</label>
+        <input type="text" name="url" placeholder="https://example.com" />
+        <button type="submit">Generate</button>
+        <button><a href="/home.ejs">Back</a></button>
+      </form>
+    </div>
+    <div class="main2">
+      <% if(locals.urls){ %>
+      <table>
+        <thead>
+          <th>S.No.</th>
+          <th>ShortID</th>
+          <th>Redirect</th>
+          <th>Clicks</th>
+        </thead>
+        <tbody>
+          <% urls.forEach((url,index) => { %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= url.shortId %></td>
+            <td><%= url.redirectUrl %></td>
+            <td><%= url.history.length %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+  </body>
+</html>
